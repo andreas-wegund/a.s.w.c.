@@ -1,0 +1,5 @@
+*.sqlite3
+.venv
+new_local_file.txt
+testfile.txt
+.DS_Store

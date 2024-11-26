@@ -35,5 +35,9 @@ RUN pip install -r requirements.txt
 ### RUN python manage.py collectstatic
 
 
+### EXPOSE THE PORT TO THE OUTSIDE WORLD
+EXPOSE 3000
+
+
 ### RUN THE APPLICATION
 CMD ["python", "manage.py", "runserver", "0.0.0.0:3000"]
