@@ -1,7 +1,7 @@
 # Name of the workflow
 name: my-first-test_workflow  
 # when should the WF be executed? --> workflow_dispatch = manually trigger the WF
-on: work[workflow_dispatch]
+on: [workflow_dispatch]
 # work that should be done is defined with `jobs` 
 jobs:
   # this name is free to be named!
