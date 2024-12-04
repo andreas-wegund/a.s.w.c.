@@ -10,8 +10,8 @@ jobs:
     # https://docs.github.com/de/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners
     runs-on: ubuntu-latest
     # define steps to be executed
-    steps: 
+    steps:
       - name: print greeting
-        run: echo "Hello from my first GitHub-Actions Workflow!"
-      - name: print goodbye
-        run: echo "Goodbye from that exact same first GitHub-Actions Workflow!"
+        run: |
+          echo "Hello from my first GitHub-Actions Workflow!"
+          echo "Goodbye from that exact same first GitHub-Actions Workflow!"
