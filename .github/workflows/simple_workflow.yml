@@ -1,0 +1,17 @@
+# Name of the workflow
+name: my-first-test_workflow  
+# when should the WF be executed? --> workflow_dispatch = manually trigger the WF
+on: [workflow_dispatch]
+# work that should be done is defined with `jobs` 
+jobs:
+  # this name is free to be named!
+  custom_named_job:
+    # here we need to define the runner on which the job should be executed
+    # https://docs.github.com/de/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners
+    runs-on: ubuntu-latest
+    # define steps to be executed
+    steps:
+      - name: print greeting
+        run: |
+          echo "Hello from my first GitHub-Actions Workflow!"
+          echo "Goodbye from that exact same first GitHub-Actions Workflow!"
