@@ -1,4 +1,7 @@
-.venv
+.venv/
+media/
+static/
+node/
+__pychache__/
+.env
 db.sqlite3
-testfile.txt
-new_local_file.txt

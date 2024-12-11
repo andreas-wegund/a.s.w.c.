@@ -1,1 +1,0 @@
-try to push it with having it added to .gitignore
