@@ -26,12 +26,14 @@ BASE_DIR = Path( __file__ ).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-#rdaic$@r3w0blr475!h##j(v)-#bom_blv$t$gyy&s=i5mgzn'
+SECRET_KEY = os.environ.get( "DJANGO_SECRET_KEY" )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", True)
+DEBUG = False if os.environ.get( "DJANGO_RUN_MODE" ) == "prod" else True
+print( "=" * 100 )
+print( f"{os.environ.get( "DJANGO_RUN_MODE" )=} {type(os.environ.get( "DJANGO_RUN_MODE" ))=}..... {DEBUG=}" )
 
-ALLOWED_HOSTS = os.environ[ "ALLOWED_HOSTS" ].split( ' ' )
+ALLOWED_HOSTS = os.environ[ "DJANGO_ALLOWED_HOSTS" ].split( ' ' )
 
 # Application definition
 
@@ -41,7 +43,10 @@ INSTALLED_APPS = [
       'django.contrib.contenttypes',
       'django.contrib.sessions',
       'django.contrib.messages',
+      
+      'cloudinary_storage',
       'django.contrib.staticfiles',
+      'cloudinary',
       
       'users.apps.UsersConfig',  # users
 ]
@@ -83,12 +88,14 @@ WSGI_APPLICATION = 'Portolio.wsgi.application'
 
 import dj_database_url
 
+
+
 DATABASES = {
       # 'default': dj_database_url.config(conn_max_age=600), # will autom. read an env var called DATABASE_URL
       
       'default': {
             'ENGINE': 'django.db.backends.sqlite3',  # SQLITE3
-            'NAME': BASE_DIR / 'db.sqlite3',
+            'NAME':   BASE_DIR / 'db.sqlite3',
       },
       # 'development': {
       #     'ENGINE': 'django.db.backends.sqlite3',  # SQLITE3
@@ -101,13 +108,12 @@ DATABASES = {
       #       'PASSWORD': os.environ[ "POSTGRES_PASSWORD" ],
       #       'HOST':     os.environ[ "POSTGRES_HOST" ],
       #       'PORT':     os.environ[ "POSTGRES_PORT" ]
-
+      
       # },
       #     'postgresql://os.environ["POSTGRES_USER"]:os.environ["POSTGRES_PASSWORD"]@os.environ["POSTGRES_HOST"]:os.environ["POSTGRES_PORT"]/os.environ["POSTGRES_DB_NAME"]'
 }
-
 if DEBUG == False:
-      DATABASES[ "default" ] = dj_database_url.parse(os.environ.get("DATABASE_URL"))
+      DATABASES[ "prod" ] = dj_database_url.parse( os.environ.get( "DATABASE_URL" ) )
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -143,11 +149,35 @@ USE_TZ = True
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [ BASE_DIR / 'static' ]
 
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
+if DEBUG == False:
+      DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+else:
+      MEDIA_ROOT = BASE_DIR / 'media'
+
+CLOUDINARY_STORAGE = {
+      'CLOUD_NAME': os.environ.get( "CLOUDINARY_CLOUD_NAME" ),
+      'API_KEY':    os.environ.get( "CLOUDINARY_API_KEY" ),
+      'API_SECRET': os.environ.get( "CLOUDINARY_API_SECRET" ),
+}
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Create E-Mail backend from GMAIL
+if DEBUG == True:
+      EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+      EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+      EMAIL_HOST = 'smtp.gmail.com'
+      EMAIL_PORT = 587
+      EMAIL_HOST_USER = os.environ.get( "GMAIL_HOST_USER" )
+      EMAIL_HOST_PASSWORD = os.environ.get( "GMAIL_HOST_PASSWORD" )
+      EMAIL_USE_TLS = True    # Transport Layer Security = makes connection secure
+      DEFAULT_FROM_EMAIL = f'Hello from {os.environ.get( "GMAIL_HOST_USER" )}!'
+      ACCOUNT_EMAIL_SUBJECT_PREFIX = 'You got mail from Andreas S. Wegund!'
