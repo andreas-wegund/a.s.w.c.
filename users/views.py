@@ -27,6 +27,8 @@ def listview( request ):
             message = 'Thank you for creating an account!'
             from_email = settings.DEFAULT_FROM_EMAIL
             recipient_list = [ 'andreas.wegund@omv.com' ]
-            send_mail( subject, message, from_email, recipient_list )
+            mail_result = send_mail( subject, message, from_email, recipient_list )
+            # It will return 1 if the message was sent successfully, otherwise 0.
+            
       
       return render( request, 'users/home.html', context )
