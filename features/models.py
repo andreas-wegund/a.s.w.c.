@@ -1,6 +1,6 @@
-from django.contrib.auth.models import User
+from django.conf import settings
+# from django.contrib.auth.models import User
 from django.db import models
-from django_extensions.db.models import TitleDescriptionModel
 
 from utils.abstracts.abstract_models.abstract_model import AbstractModel as AbstractModel
 
@@ -11,7 +11,7 @@ from utils.abstracts.abstract_models.abstract_model import AbstractModel as Abst
 # Create your models here.
 class Feature( AbstractModel ):
       feature_name = models.CharField( max_length=255, unique=True )
-      developer = models.OneToOneField( User, on_delete=models.CASCADE )
+      developer = models.ForeignKey( settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True )
       staging_enabled = models.BooleanField( default=False )
       production_enabled = models.BooleanField( default=False )
       

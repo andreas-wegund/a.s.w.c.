@@ -15,6 +15,7 @@ from django.db import models
 # 3rd party imports
 # --------------------------------------------------------------
 from django_extensions.db.models import (
+    TitleDescriptionModel,
     TimeStampedModel,
     ActivatorModel,
 )
