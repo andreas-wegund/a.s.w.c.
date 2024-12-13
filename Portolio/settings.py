@@ -35,8 +35,6 @@ BASE_DIR = Path( __file__ ).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get( "DJANGO_SECRET_KEY" )
 
-
-
 # -----------------------------------------------------------------------------#
 # SECURITY WARNING: don't run with debug turned on in production!
 # -----------------------------------------------------------------------------#
@@ -92,10 +90,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Portolio.urls'
+AUTH_USER_MODEL = 'users.CustomUser'
 
 # -----------------------------------------------------------------------------#
 # TEMPLATE SETTINGS
 # -----------------------------------------------------------------------------#
+# import utils.context_processors.features_enabled
 TEMPLATES = [
       {
             'BACKEND':  'django.template.backends.django.DjangoTemplates',
@@ -109,6 +109,8 @@ TEMPLATES = [
                         'django.template.context_processors.request',
                         'django.contrib.auth.context_processors.auth',
                         'django.contrib.messages.context_processors.messages',
+                        
+                        'utils.context_processors.custom_context.my_custom_context',
                   ],
             },
       },

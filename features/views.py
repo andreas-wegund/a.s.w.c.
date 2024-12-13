@@ -1,6 +1,6 @@
 from django.conf import settings
 
-from models import Feature
+from .models import Feature
 
 
 
@@ -20,21 +20,21 @@ def feature_enabled( request, I_feature_name: str ) -> bool:
       :return: boolean indicating if the feature should be enabled (True) or not (False)
       """
       
-      ENABLE_FEAURE = False
+      ENABLE_FEATURE = False
       # DEVELOPMENT
-      if ((settings.DJANGO_RUN_MODE == 'DEVELOPMENT') & (request.user.username == Feature.developer.username)):
-            ENABLE_FEAURE = True
+      if ((settings.DJANGO_RUN_MODE == 'DEVELOPMENT') & (Feature.objects.filter( developer__username=request.user.username, feature_name=I_feature_name ).exists())):
+            ENABLE_FEATURE = True
       
       # STAGING
       elif ((settings.DJANGO_RUN_MODE == 'STAGING') & (Feature.objects.get( feature_name=I_feature_name ).staging_enabled)):
-            ENABLE_FEAURE = True
+            ENABLE_FEATURE = True
       
       # PRODUCTION
       elif ((settings.DJANGO_RUN_MODE == 'PRODUCTION') & (Feature.objects.get( feature_name=I_feature_name ).production_enabled)):
-            ENABLE_FEAURE = True
+            ENABLE_FEATURE = True
       
       # OTHERS
       else:
-            ENABLE_FEAURE = False
+            ENABLE_FEATURE = False
       
-      return ENABLE_FEAURE
+      return ENABLE_FEATURE
