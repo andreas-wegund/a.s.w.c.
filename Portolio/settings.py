@@ -44,15 +44,19 @@ DJANGO_RUN_MODES = {
       'PRODUCTION':  False
 }
 DJANGO_RUN_MODE = os.environ.get( "DJANGO_RUN_MODE" )
+print( "=" * 100 )
 match DJANGO_RUN_MODE:
       case 'DEVELOPMENT':     DEBUG = DJANGO_RUN_MODES[ DJANGO_RUN_MODE ]
       case 'STAGING':         DEBUG = DJANGO_RUN_MODES[ DJANGO_RUN_MODE ]
       case 'PRODUCTION':      DEBUG = DJANGO_RUN_MODES[ DJANGO_RUN_MODE ]
       case _:                 DEBUG = False
-# print( "=" * 100 )
-# print( f"{os.environ.get( "DJANGO_RUN_MODE" )=} {os.environ.get( "DJANGO_RUN_MODES" )=}..... {DEBUG=}" )
+print( "=" * 100 )
+print( f"{os.environ.get( "DJANGO_RUN_MODE" )=} {os.environ.get( "DJANGO_RUN_MODES" )=}..... {DEBUG=}" )
+print( "=" * 100 )
 
 ALLOWED_HOSTS = os.environ[ "DJANGO_ALLOWED_HOSTS" ].split( ' ' )
+# CROSS SITE REQUEST FORGERY
+CSRF_TRUSTED_ORIGINS = os.environ[ 'CSRF_TRUSTED_ORIGINS' ].split( ' ' )
 
 # -----------------------------------------------------------------------------#
 # INSTALLED APPS
@@ -63,6 +67,9 @@ INSTALLED_APPS = [
       'django.contrib.contenttypes',
       'django.contrib.sessions',
       'django.contrib.messages',
+      
+      'admin_honeypot',
+      'django.contrib.sitemaps',  # SEO
       
       'django_extensions',  # Model Extensions - https://django-extensions.readthedocs.io
       
@@ -191,6 +198,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [ BASE_DIR / 'static' ]
+STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
 
 MEDIA_URL = '/media/'
 if DEBUG == False:

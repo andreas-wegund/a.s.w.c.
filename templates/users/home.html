@@ -1,24 +1,21 @@
+{% extends 'base.html' %}
+
+
 {% load static %}
-{% load cloudinary %}
+{#{% load cloudinary %}#}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <title>Portfolio - Home</title>
 
-    <link rel="stylesheet"
-          href="{% if debug %}{% static 'css/style.css' %}{% else %}{% static 'css/style.min.css' %}{% endif %}">
-</head>
-<body>
-<h1 class="text-center text-amber-600 font-extrabold text-5xl m-24 p-12 bg-slate-300 rounded-xl">Welcome to my Portfolio
-    Website, dear Guest!{{ fullname }}</h1>
-<h3>{% if feature_HeroButton %}<span style="color: green">Herobutton is enabled</span>{% else %}
-    <span style="color:red">Herobutton is DISabled</span>{% endif %}</h3>
+{% block title %}Home{% endblock title %}
 
-context E-Mail: {{ my_gmail }}
 
-</body>
-</html>
+{% block content %}
+
+    <h1 class="text-center text-amber-600 font-extrabold text-5xl m-24 p-12 bg-slate-300 rounded-xl">Welcome to my
+        Portfolio
+        Website, dear Guest!{{ fullname }}</h1>
+    <h3>{% if feature_HeroButton %}<span style="color: green">Herobutton is enabled</span>{% else %}
+        <span style="color:red">Herobutton is DISabled</span>{% endif %}</h3>
+
+    context Run-Mode: {{ DJANGO_RUN_MODE }}
+
+{% endblock content %}

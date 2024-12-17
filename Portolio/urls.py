@@ -14,12 +14,51 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+from django.conf import settings
+from django.conf.urls.static import static
+### ============================================================================================ #
+### IMPORTS
+### ============================================================================================ #
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.views.generic import TemplateView
 
-import users.views as user_views
+from users import views
+from users.sitemaps import StatisticSitemap, CategorySitemap, PostPagesSitemap
 
+
+
+### ============================================================================================ #
+### SITEMAPS
+### ============================================================================================ #
+
+sitemaps = {
+      'static':     StatisticSitemap,
+      'categories': CategorySitemap,
+      'posts':      PostPagesSitemap
+}
+
+### ============================================================================================ #
+### URL-ROUTING
+### ============================================================================================ #
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', user_views.listview, name='home'),
+      
+      # # Django creates the XML-file automatically
+      # path( 'sitemap.xml', sitemap, { 'sitemaps': sitemaps }, name='django.contrib.sitemaps.view.sitemap' ),
+      # robots.txt --> search engines should NOT index these pages
+      path( 'robots.txt', TemplateView.as_view( template_name='robots.txt', content_type='text/plain' ) ),
+      
+      # path( 'admin/', admin.site.urls ),
+      path( 'admin/', include( 'admin_honeypot.urls', namespace='admin_honeypot' ) ),
+      path( 'aswc_admin/', admin.site.urls ),
+      
+      path( '', views.home, name='home' ),
+
 ]
+
+### ============================================================================================ #
+### STATICFILES & MEDIAFILES
+### ============================================================================================ #
+urlpatterns += static( settings.STATIC_URL, document_root=settings.STATIC_ROOT )
+urlpatterns += static( settings.MEDIA_URL, document_root=settings.MEDIA_ROOT )
