@@ -36,8 +36,8 @@ jobs:
       - name: upload requirements_NEICH.txt to our repository
         uses: zyrouge/github-push-action@main
         with:
-          directory: './'
-          branch: main
+          directory: '.'
+          branch: master
           verbose: true
           allow-empty-commit: true
 
