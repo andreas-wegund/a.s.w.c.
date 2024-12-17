@@ -13,11 +13,11 @@ jobs:
       DJANGO_SECRET_KEY: dev_secret_key
 
     steps:
-      # name: Clone Repository into our runner-environment
-      - uses : actions/checkout@v4
+      - name: Clone Repository into our runner-environment
+        uses : actions/checkout@v4
 
-      # name: setup python in this container
-      - uses: actions/setup-python@v5
+      - name: Setup python in this container
+        uses: actions/setup-python@v5
         with:
           python-version : 3.11.3
 
