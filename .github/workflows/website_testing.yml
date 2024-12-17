@@ -37,7 +37,7 @@ jobs:
         uses: zyrouge/github-push-action@main
         with:
           directory: '.'
-          branch: master
+          branch: staging
           verbose: true
           allow-empty-commit: true
 
