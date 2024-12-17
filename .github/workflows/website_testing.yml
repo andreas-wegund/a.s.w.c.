@@ -1,6 +1,6 @@
 name: 'RUN WEBSITE TESTS:'
 on:
-  push_request:
+  push:
     branches:
       - master
 
