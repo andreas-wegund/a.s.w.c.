@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from features.views import feature_enabled
+
 
 
 app_name = 'users'
