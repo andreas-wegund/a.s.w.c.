@@ -28,9 +28,18 @@ jobs:
         run: ls
 
       - name: Copy and Rename Requirements-File
-        run: mv requirements.txt requirements_NEICH.txt
+        run: |
+          mv requirements.txt requirements_NEICH.txt
 
-#      - run: mv requirements.txt requirements_NEICH.txt
+      - name: Upload a Build Artifact `requirements.txt`
+        uses: actions/upload-artifact@v4.4.3
+        with:
+          path: requirements_NEICH.txt
+          # If true, an artifact with a matching name will be deleted before a new one is uploaded.
+          # If false, the action will fail if an artifact for the given name already exists.
+          # Does not fail if the artifact does not exist.
+          # Optional. Default is 'false'
+          overwrite: true
 
       - name: Install Requirements.txt file
         run: pip install -r requirements_NEICH.txt
