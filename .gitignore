@@ -1,9 +1,6 @@
-.venv/
-.idea/
 media/
 static/
 node/
-__pychache__/
 
 
 
