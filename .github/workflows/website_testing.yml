@@ -33,13 +33,13 @@ jobs:
       - name: Install Requirements.txt file
         run: pip install -r requirements_NEICH.txt
 
-      - name: upload requirements_NEICH.txt to our repository
-        uses: zyrouge/github-push-action@main
-        with:
-          directory: '.'
-          branch: staging
-          verbose: true
-          allow-empty-commit: true
+#      - name: upload requirements_NEICH.txt to our repository
+#        uses: zyrouge/github-push-action@main
+#        with:
+#          directory: '.'
+#          branch: staging
+#          verbose: true
+#          allow-empty-commit: true
 
 
 #      - run: python manage.py test

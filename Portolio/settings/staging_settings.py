@@ -18,17 +18,12 @@ CSRF_TRUSTED_ORIGINS = os.environ[ 'CSRF_TRUSTED_ORIGINS_' + DJANGO_RUN_MODE ].s
 ### ============================================================================================ #
 ### INTERNAL_IPS
 ### ============================================================================================ #
-INTERNAL_IPS = [
-      '127.0.0.1',
-      'localhost',
-]
+INTERNAL_IPS = os.environ[ 'DJANGO_INTERNAL_IPS_' + DJANGO_RUN_MODE ].split( ' ' )
 
 ### ============================================================================================ #
 ### INSTALLED_APPS
 ### ============================================================================================ #
 INSTALLED_APPS.append( 'cloudinary_storage' )
-INSTALLED_APPS.append( 'django.contrib.staticfiles' )
-INSTALLED_APPS.append( 'cloudinary' )
 
 ### ============================================================================================ #
 ### MIDDLEWARE
@@ -42,7 +37,7 @@ import dj_database_url
 
 
 
-DATABASES[ "prod" ] = dj_database_url.parse( os.environ.get( "DATABASE_URL" + DJANGO_RUN_MODE ) )
+DATABASES[ "default" ] = dj_database_url.parse( os.environ.get( "DATABASE_URL_" + DJANGO_RUN_MODE ) )
 
 ### ============================================================================================ #
 ### STATIC FILES AND MEDIA FILES & CLOUDINARY STORAGE

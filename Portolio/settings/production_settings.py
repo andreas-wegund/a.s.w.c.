@@ -21,16 +21,12 @@ CSRF_TRUSTED_ORIGINS = os.environ[ 'CSRF_TRUSTED_ORIGINS_' + DJANGO_RUN_MODE ].s
 ### ============================================================================================ #
 ### INTERNAL_IPS
 ### ============================================================================================ #
-INTERNAL_IPS = [
-      ##########
-]
+INTERNAL_IPS = os.environ[ 'DJANGO_INTERNAL_IPS_' + DJANGO_RUN_MODE ].split( ' ' )
 
 ### ============================================================================================ #
 ### INSTALLED_APPS
 ### ============================================================================================ #
 INSTALLED_APPS.append( 'cloudinary_storage' )
-INSTALLED_APPS.append( 'django.contrib.staticfiles' )
-INSTALLED_APPS.append( 'cloudinary' )
 
 ### ============================================================================================ #
 ### MIDDLEWARE
@@ -44,13 +40,12 @@ import dj_database_url
 
 
 
-DATABASES[ "prod" ] = dj_database_url.parse( os.environ.get( "DATABASE_URL" + DJANGO_RUN_MODE ) )
+DATABASES[ 'default' ] = dj_database_url.parse( os.environ.get( "DATABASE_URL_" + DJANGO_RUN_MODE ) )
 
 ### ============================================================================================ #
 ### STATIC FILES AND MEDIA FILES & CLOUDINARY STORAGE
 ### ============================================================================================ #
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
@@ -64,6 +59,7 @@ CLOUDINARY_STORAGE = {
 ### EMAIL SETTINGS
 ### ============================================================================================ #
 # Create E-Mail backend from GMAIL
+# TODO: PRODUCTION__SETTINGS__EMAIL
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
