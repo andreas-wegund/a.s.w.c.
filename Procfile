@@ -1,1 +1,1 @@
-web: gunicorn Portolio.wsgi -c gunicorn.conf.py
+web: gunicorn Portolio.wsgi --forwarded-allow-ips "*"
