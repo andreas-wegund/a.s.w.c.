@@ -1,1 +1,1 @@
-web:  gunicorn Portolio.wsgi
+web: gunicorn Portolio.wsgi -c gunicorn.conf.py
