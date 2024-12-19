@@ -65,8 +65,8 @@ INSTALLED_APPS = [
       
       ### --------------------------------------
       ### CLOUDINARY (after django.contrib.staticfiles)
-      'cloudinary_storage',   # CLOUDINARY STORAGE - https://pypi.org/project/django-cloudinary-storage/
-      'cloudinary',           # CLOUDINARY
+      'cloudinary_storage',  # CLOUDINARY STORAGE - https://pypi.org/project/django-cloudinary-storage/
+      'cloudinary',  # CLOUDINARY
       
       ### --------------------------------------
       ### DJANGO EXTENSIONS
@@ -86,6 +86,23 @@ INSTALLED_APPS = [
       'users.apps.UsersConfig',  # Users APP
       'features.apps.FeaturesConfig',  # Development Features APP
 ]
+
+# ### ============================================================================================ #
+# ### STATIC FILES AND MEDIA FILES & CLOUDINARY STORAGE
+# ### ============================================================================================ #
+# # https://docs.djangoproject.com/en/5.1/howto/static-files/
+# # static
+# # STATIC_URL -> prefix for the urls in the templates where staticfiles are stored in Development
+# STATIC_URL = '/static/'
+# # STATICFILES_DIRS -> in Development django will try to search here for existing staticfiles
+# # Should match the above folders, accordingly
+# STATICFILES_DIRS = [
+#       os.path.join( BASE_DIR, 'static' ),
+#       os.path.join( BASE_DIR, 'media' ),
+# ]
+# # *_ROOT -> this is where the `pyhton manage.py collectstatic` command will store the files for
+# #           Deployment to Production ( so this should be `staticFILES` & `mediaFILES`
+# STATIC_ROOT = os.path.join( BASE_DIR, 'staticfiles' )  # -->
 
 ### ============================================================================================ #
 ### MIDDLEWEARE
@@ -167,25 +184,6 @@ AUTH_PASSWORD_VALIDATORS = [
             'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
       },
 ]
-
-### ============================================================================================ #
-### STATIC FILES AND MEDIA FILES & CLOUDINARY STORAGE
-### ============================================================================================ #
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-# static
-# STATIC_URL -> prefix for the urls in the templates where staticfiles are stored in Development
-STATIC_URL = '/static/'
-# STATICFILES_DIRS -> in Development django will try to search here for existing staticfiles
-# Should match the above folders, accordingly
-STATICFILES_DIRS = [
-      os.path.join( BASE_DIR, 'static' ),
-      os.path.join( BASE_DIR, 'media' ),
-]
-# *_ROOT -> this is where the `pyhton manage.py collectstatic` command will store the files for
-#           Deployment to Production ( so this should be `staticFILES` & `mediaFILES`
-STATIC_ROOT = os.path.join( BASE_DIR, 'staticfiles' )  # -->
-
-
 
 ### ============================================================================================ #
 ### INTERNATIONALIZATION
