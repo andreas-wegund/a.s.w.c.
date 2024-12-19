@@ -1,7 +1,6 @@
 ### ============================================================================================ #
-### IMPORTS
+###  IMPORTS
 ### ============================================================================================ #
-
 from .base_settings import *
 
 
@@ -37,7 +36,7 @@ import dj_database_url
 
 
 
-DATABASES[ "default" ] = dj_database_url.parse( os.environ.get( "DATABASE_URL_" + DJANGO_RUN_MODE ) )
+DATABASES[ 'default' ] = dj_database_url.parse( os.environ.get( "DATABASE_URL_" + DJANGO_RUN_MODE ) )
 
 ### ============================================================================================ #
 ### STATIC FILES AND MEDIA FILES & CLOUDINARY STORAGE
@@ -51,13 +50,11 @@ CLOUDINARY_STORAGE = {
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-MEDIA_URL = '/media/'  # or any prefix you choose
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
 ### ============================================================================================ #
 ### EMAIL SETTINGS
 ### ============================================================================================ #
 # Create E-Mail backend from GMAIL
+# TODO: PRODUCTION__SETTINGS__EMAIL
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587

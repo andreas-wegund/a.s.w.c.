@@ -47,20 +47,10 @@ DJANGO_RUN_MODES = {
 
 DJANGO_RUN_MODE = os.environ.get( "DJANGO_RUN_MODE" )
 match DJANGO_RUN_MODE:
-      case 'DEVELOPMENT':
-            DEBUG = DJANGO_RUN_MODES[ DJANGO_RUN_MODE ]
-            # os.environ['DJANGO_SETTINGS_MODULE'] = 'Portolio.settings.development_settings'
-      
-      case 'STAGING':
-            DEBUG = DJANGO_RUN_MODES[ DJANGO_RUN_MODE ]
-            # os.environ[ 'DJANGO_SETTINGS_MODULE' ] = 'Portolio.settings.staging_settings'
-      
-      case 'PRODUCTION':
-            DEBUG = DJANGO_RUN_MODES[ DJANGO_RUN_MODE ]
-            # os.environ[ 'DJANGO_SETTINGS_MODULE' ] = 'Portolio.settings.production_settings'
-      
-      case _:
-            print( "======= !!!!DJANGO_RUN_MODE_ERROR!!!! ========" )
+      case 'DEVELOPMENT':     DEBUG = DJANGO_RUN_MODES[ DJANGO_RUN_MODE ]
+      case 'STAGING':         DEBUG = DJANGO_RUN_MODES[ DJANGO_RUN_MODE ]
+      case 'PRODUCTION':      DEBUG = DJANGO_RUN_MODES[ DJANGO_RUN_MODE ]
+      case _:                 print( "======= !!!!DJANGO_RUN_MODE_ERROR!!!! ========" )
 
 ### ============================================================================================ #
 ### INSTALLED APPS
@@ -73,21 +63,25 @@ INSTALLED_APPS = [
       'django.contrib.messages',
       'django.contrib.staticfiles',
       
-      ### ==================
+      ### --------------------------------------
+      ### CLOUDINARY (after django.contrib.staticfiles)
+      'cloudinary_storage',   # CLOUDINARY STORAGE - https://pypi.org/project/django-cloudinary-storage/
+      'cloudinary',           # CLOUDINARY
+      
+      ### --------------------------------------
       ### DJANGO EXTENSIONS
       'django.contrib.sitemaps',  # SEO
       'django_extensions',  # MODEL EXTENSIONS - https://django-extensions.readthedocs.io
       
-      ### ==================
+      ### --------------------------------------
       ### 3-RD PARTY PACKAGES
       'admin_honeypot',  # ADMIN HONEYPOT
-      'cloudinary',  # CLOUDINARY
       'django_otp',  # OTP - One Time Password
       'django_otp.plugins.otp_totp',  # OTP - One Time Password
       # 'django_otp.plugins.otp_hotp',  # OTP - One Time Password ==> NOT NEEDED
       # 'django_otp.plugins.otp_static',  # OTP - One Time Password ==> NOT NEEDED
       
-      ### ==================
+      ### --------------------------------------
       ### APPS
       'users.apps.UsersConfig',  # Users APP
       'features.apps.FeaturesConfig',  # Development Features APP
@@ -180,10 +174,6 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 # static
 # STATIC_URL -> prefix for the urls in the templates where staticfiles are stored in Development
-# MEDIA_URL  -> prefix like for STATIC_URL
-MEDIA_URL = '/media/'
-
-
 STATIC_URL = '/static/'
 # STATICFILES_DIRS -> in Development django will try to search here for existing staticfiles
 # Should match the above folders, accordingly
@@ -195,8 +185,7 @@ STATICFILES_DIRS = [
 #           Deployment to Production ( so this should be `staticFILES` & `mediaFILES`
 STATIC_ROOT = os.path.join( BASE_DIR, 'staticfiles' )  # -->
 
-# We need to have this entry in Development as we have {% load cloudinary %} in the html templates
-STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+
 
 ### ============================================================================================ #
 ### INTERNATIONALIZATION
