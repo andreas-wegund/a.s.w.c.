@@ -84,7 +84,7 @@ class ContactView( TemplateView ):
                   recipient_list = [ 'andreas.wegund@omv.com' ]
                   mail_result = send_mail( subject, message, from_email, recipient_list )
                   # It will return 1 if the message was sent successfully, otherwise 0.
-            
+             
             return context
 
 # ### ============================================================================================ #
