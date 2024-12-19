@@ -47,10 +47,23 @@ DJANGO_RUN_MODES = {
 
 DJANGO_RUN_MODE = os.environ.get( "DJANGO_RUN_MODE" )
 match DJANGO_RUN_MODE:
-      case 'DEVELOPMENT':     DEBUG = DJANGO_RUN_MODES[ DJANGO_RUN_MODE ]
-      case 'STAGING':         DEBUG = DJANGO_RUN_MODES[ DJANGO_RUN_MODE ]
-      case 'PRODUCTION':      DEBUG = DJANGO_RUN_MODES[ DJANGO_RUN_MODE ]
-      case _:                 print( "======= !!!!DJANGO_RUN_MODE_ERROR!!!! ========" )
+      case 'DEVELOPMENT':
+            DEBUG = DJANGO_RUN_MODES[ DJANGO_RUN_MODE ]
+            os.environ['DJANGO_SETTINGS_MODULE'] = 'Portolio.settings.development_settings'
+      
+      case 'STAGING':
+            DEBUG = DJANGO_RUN_MODES[ DJANGO_RUN_MODE ]
+            os.environ[ 'DJANGO_SETTINGS_MODULE' ] = 'Portolio.settings.staging_settings'
+            
+      case 'PRODUCTION':
+            DEBUG = DJANGO_RUN_MODES[ DJANGO_RUN_MODE ]
+            os.environ[ 'DJANGO_SETTINGS_MODULE' ] = 'Portolio.settings.production_settings'
+
+      case _:
+            print( "======= !!!!DJANGO_RUN_MODE_ERROR!!!! ========" )
+
+
+
 
 ### ============================================================================================ #
 ### INSTALLED APPS
