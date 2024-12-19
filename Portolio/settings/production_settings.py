@@ -55,7 +55,16 @@ CLOUDINARY_STORAGE = {
       'API_SECRET': os.environ.get( "CLOUDINARY_API_SECRET" ),
 }
 MEDIA_URL = '/media/'  # or any prefix you choose
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+### DEFAULT_FILE_STORAGE is depreciated ==> instead we need to use the below's setup
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+STORAGES = {
+      "default":     {
+            "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+      },
+      "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+      },
+}
 
 ### ============================================================================================ #
 ### EMAIL SETTINGS
