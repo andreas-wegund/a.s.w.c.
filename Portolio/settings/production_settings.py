@@ -72,10 +72,10 @@ STORAGES = {
 # Create E-Mail backend from GMAIL
 # TODO: PRODUCTION__SETTINGS__EMAIL
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = os.environ.get( "GMAIL_HOST_USER" )
-EMAIL_HOST_PASSWORD = os.environ.get( "GMAIL_HOST_PASSWORD" )
+EMAIL_HOST = 'smtp.porkbun.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = os.environ.get( "PORKBUN_HOST_USER" )
+EMAIL_HOST_PASSWORD = os.environ.get( "PORKBUN_HOST_PASSWORD" )
 EMAIL_USE_TLS = True  # Transport Layer Security = makes connection secure
-DEFAULT_FROM_EMAIL = f'Hello from {os.environ.get( "GMAIL_HOST_USER" )}!'
-ACCOUNT_EMAIL_SUBJECT_PREFIX = 'You got mail from Andreas S. Wegund!'
+DEFAULT_FROM_EMAIL = f'Hello from {os.environ.get( "PORKBUN_HOST_USER" )}!'
+ACCOUNT_EMAIL_SUBJECT_PREFIX = 'a.s.w.c.! HOLD STRONG: you received mail from Andreas S. Wegund!'
