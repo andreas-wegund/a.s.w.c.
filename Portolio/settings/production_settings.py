@@ -20,11 +20,6 @@ CSRF_TRUSTED_ORIGINS = os.environ[ 'CSRF_TRUSTED_ORIGINS_' + DJANGO_RUN_MODE ].s
 INTERNAL_IPS = os.environ[ 'DJANGO_INTERNAL_IPS_' + DJANGO_RUN_MODE ].split( ' ' )
 
 ### ============================================================================================ #
-### INSTALLED_APPS
-### ============================================================================================ #
-INSTALLED_APPS.append( 'cloudinary_storage' )
-
-### ============================================================================================ #
 ### MIDDLEWARE
 ### ============================================================================================ #
 MIDDLEWARE.append( 'whitenoise.middleware.WhiteNoiseMiddleware' )
