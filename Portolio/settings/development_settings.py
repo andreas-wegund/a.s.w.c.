@@ -31,6 +31,12 @@ ALLOWED_HOSTS = os.environ[ "DJANGO_ALLOWED_HOSTS_" + DJANGO_RUN_MODE ].split( '
 # CROSS SITE REQUEST FORGERY
 CSRF_TRUSTED_ORIGINS = os.environ[ 'CSRF_TRUSTED_ORIGINS_' + DJANGO_RUN_MODE ].split( ' ' )
 
+### ============================================================================================ #
+### MEDIA FILES & CLOUDINARY STORAGE
+### ============================================================================================ #
+# https://docs.djangoproject.com/en/5.1/howto/static-files/
+MEDIA_ROOT = os.path.join( BASE_DIR, 'media' )
+
 
 ### ============================================================================================ #
 ### EMAIL SETTINGS

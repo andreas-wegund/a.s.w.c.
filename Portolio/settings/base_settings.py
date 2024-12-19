@@ -49,21 +49,18 @@ DJANGO_RUN_MODE = os.environ.get( "DJANGO_RUN_MODE" )
 match DJANGO_RUN_MODE:
       case 'DEVELOPMENT':
             DEBUG = DJANGO_RUN_MODES[ DJANGO_RUN_MODE ]
-            os.environ['DJANGO_SETTINGS_MODULE'] = 'Portolio.settings.development_settings'
+            # os.environ['DJANGO_SETTINGS_MODULE'] = 'Portolio.settings.development_settings'
       
       case 'STAGING':
             DEBUG = DJANGO_RUN_MODES[ DJANGO_RUN_MODE ]
-            os.environ[ 'DJANGO_SETTINGS_MODULE' ] = 'Portolio.settings.staging_settings'
-            
+            # os.environ[ 'DJANGO_SETTINGS_MODULE' ] = 'Portolio.settings.staging_settings'
+      
       case 'PRODUCTION':
             DEBUG = DJANGO_RUN_MODES[ DJANGO_RUN_MODE ]
-            os.environ[ 'DJANGO_SETTINGS_MODULE' ] = 'Portolio.settings.production_settings'
-
+            # os.environ[ 'DJANGO_SETTINGS_MODULE' ] = 'Portolio.settings.production_settings'
+      
       case _:
             print( "======= !!!!DJANGO_RUN_MODE_ERROR!!!! ========" )
-
-
-
 
 ### ============================================================================================ #
 ### INSTALLED APPS
@@ -185,7 +182,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # STATIC_URL -> prefix for the urls in the templates where staticfiles are stored in Development
 # MEDIA_URL  -> prefix like for STATIC_URL
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join( BASE_DIR, 'media' )
+
 
 STATIC_URL = '/static/'
 # STATICFILES_DIRS -> in Development django will try to search here for existing staticfiles
