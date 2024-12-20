@@ -40,7 +40,18 @@ STATIC_ROOT = os.path.join( BASE_DIR, 'staticfiles' )  # -->
 MEDIA_ROOT = os.path.join( BASE_DIR, 'media' )
 MEDIA_URL = '/media/'  # or any prefix you choose
 
+
 ### ============================================================================================ #
 ### EMAIL SETTINGS
 ### ============================================================================================ #
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# Create E-Mail backend from GMAIL
+# TODO: für prod hier in DEVELOPMENT löschen
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.porkbun.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = os.environ.get( "PORKBUN_HOST_USER" )
+EMAIL_HOST_PASSWORD = os.environ.get( "PORKBUN_HOST_PASSWORD" )
+EMAIL_USE_TSL = False
+EMAIL_USE_SSL = True  # Transport Layer Security = makes connection secure
+DEFAULT_FROM_EMAIL = f'Hello from {os.environ.get( "PORKBUN_DEFAULT_FROM_MAIL" )}!'
+ACCOUNT_EMAIL_SUBJECT_PREFIX = 'a.s.w.c.! HOLD STRONG: you received mail from Andreas S. Wegund!'

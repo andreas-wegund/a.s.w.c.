@@ -1,8 +1,16 @@
+<<<<<<< HEAD
+=======
+.venv/
+>>>>>>> parent of 9d09311 (refresh git from scratch)
 .idea/
 media/
 static/
 node/
+<<<<<<< HEAD
 ___KEYS_&_CODES___/
+=======
+__pychache__/
+>>>>>>> parent of 9d09311 (refresh git from scratch)
 
 
 

@@ -77,14 +77,20 @@ class ContactView( TemplateView ):
             context[ 'userprofiles' ] = userprofiles
             
             # Send a mail using GMAIL (STAGING) or PORKBUN (PRODUCTION)
-            if (settings.DJANGO_RUN_MODE == 'STAGING') | (settings.DJANGO_RUN_MODE == 'PRODUCTION'):
-                  subject = settings.ACCOUNT_EMAIL_SUBJECT_PREFIX
-                  message = 'Thank you for creating an account!'
-                  from_email = settings.DEFAULT_FROM_EMAIL
-                  recipient_list = [ 'andreas.wegund@omv.com' ]
-                  mail_result = send_mail( subject, message, from_email, recipient_list )
-                  # It will return 1 if the message was sent successfully, otherwise 0.
-             
+            # if (settings.DJANGO_RUN_MODE == 'STAGING') | (settings.DJANGO_RUN_MODE == 'PRODUCTION'):
+            subject = settings.ACCOUNT_EMAIL_SUBJECT_PREFIX
+            print( "=" * 100 )
+            print( subject )
+            message = 'Thank you for creating an account!'
+            from_email = settings.DEFAULT_FROM_EMAIL
+            print( from_email )
+            recipient_list = [ 'andreas.wegund@omv.com' ]
+            
+            print( subject, message, from_email, recipient_list )
+            
+            mail_result = send_mail( subject, message, from_email, recipient_list, fail_silently=False )
+            # It will return 1 if the message was sent successfully, otherwise 0.
+            
             return context
 
 # ### ============================================================================================ #
